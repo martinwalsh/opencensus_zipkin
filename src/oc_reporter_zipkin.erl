@@ -136,5 +136,5 @@ zipkin_address(Options) ->
 local_endpoint(Options) ->
     proplists:get_value(local_endpoint, Options, ?DEFAULT_LOCAL_ENDPOINT).
 
-optional_fields(Span) ->
+optional_fields(_Span) ->
   #{}.
