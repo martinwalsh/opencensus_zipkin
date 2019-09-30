@@ -137,22 +137,4 @@ local_endpoint(Options) ->
     proplists:get_value(local_endpoint, Options, ?DEFAULT_LOCAL_ENDPOINT).
 
 optional_fields(Span) ->
-    lists:foldl(fun(Field, Acc) ->
-                        case span_field(Field, Span) of
-                            undefined ->
-                                Acc;
-                            Value ->
-                                maps:put(Field, Value, Acc)
-                        end
-                end, #{}, [<<"kind">>, <<"parentId">>]).
-
-span_field(<<"parentId">>, #span{parent_span_id=undefined}) ->
-    undefined;
-span_field(<<"parentId">>, #span{parent_span_id=ParentId}) ->
-    iolist_to_binary(io_lib:format("~16.16.0b", [ParentId]));
-span_field(<<"kind">>, #span{kind=?SPAN_KIND_UNSPECIFIED}) ->
-    undefined;
-span_field(<<"kind">>, #span{kind=?SPAN_KIND_SERVER}) ->
-    <<"SERVER">>;
-span_field(<<"kind">>, #span{kind=?SPAN_KIND_CLIENT}) ->
-    <<"CLIENT">>.
+  #{}.
